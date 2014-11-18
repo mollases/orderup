@@ -5,7 +5,8 @@ angular.module('orderup')
             $scope.restaurant = $routeParams.restaurant;
             $scope.location = $routeParams.location;
             $scope.orders = [{
-                size: 'small'
+                size: 'small',
+                amount: 1
             }];
             $scope.pickupTime = new Date();
             $scope.previousPickupTime = new Date();
@@ -124,6 +125,12 @@ angular.module('orderup')
             };
 
             $scope.calcPrice = function(order) {
+                if(!order.price){
+                    order.price = 1;
+                } else if (order.price < 1){
+                    order.price = 1;
+                }
+
                 var requestedSize = order.size;
                 var findCost = function(item, size) {
                     if (!item) return 0;
@@ -180,6 +187,7 @@ angular.module('orderup')
                     }
                 }
 
+                order.price *= order.amount;
                 order.price = order.price.toFixed(2);
             };
 

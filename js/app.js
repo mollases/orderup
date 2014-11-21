@@ -12,7 +12,6 @@ angular
     .module('orderup', [
         'ui.router',
         'ui.bootstrap',
-        'ngAnimate',
         'ngCookies',
         'ngResource',
         'ngRoute',

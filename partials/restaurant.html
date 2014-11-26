@@ -1,4 +1,4 @@
-<!-- <div class="section" id="location">
+<div class="section" id="location">
     <h2 class="text-center">{{restaurant || 'Sorry, no restaurants under that name'}}</h2>
     <h3 class="text-center">{{location || 'No location chosen'}}</h3>
 </div>
@@ -13,7 +13,7 @@
         <input type="text" class="form-control" placeholder="Bartolomé de las Casas" ng-model="orderName">
     </div>
 </div>
- -->
+
 <div class="section" id="order">
 
     <h1 class="text-center">
@@ -38,8 +38,8 @@
             </div>
             <div class="col-md-2">
                 <div class="well well-xs clearfix">
+                    <div class="visible-xs-block">Amount</div>
                     <div class="input-group">
-
                         <span class="input-group-addon">#</span>
                         <input type="number" class="form-control" placeholder="" min="1" ng-model="order.amount" ng-change="calcPrice(order)">
                     </div>
@@ -47,6 +47,7 @@
             </div>
             <div class="btn-group col-md-8 col-xs-12">
                 <div class="well well-xs clearfix">
+                    <div class="visible-xs-block">Drink</div>
                     <label class="btn btn-default col-xs-6 " ng-class="getSize(config.menu.drinks.length)" ng-model="order.drink" btn-radio="drink.name" uncheckable ng-repeat="drink in config.menu.drinks" ng-change="calcPrice(order)">{{drink.name}}</label>
                 </div>
             </div>

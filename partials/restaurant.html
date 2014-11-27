@@ -22,7 +22,7 @@
     </h1>
 
     <div class="space">
-        <label type="button" class="btn btn-success" ng-click="orders.push({size: 'small',amount: 1})">
+        <label type="button" class="btn btn-success" ng-click="orders.push({})">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             <span class="sr-only">add</span>
         </label>
@@ -47,93 +47,77 @@
             </div>
             <div class="btn-group col-md-8 col-xs-12">
                 <div class="well well-xs clearfix">
-                    <div class="visible-xs-block">Drink</div>
+                    <div class="visible-xs-block lead">Drink</div>
                     <label class="btn btn-default col-xs-6 " ng-class="getSize(config.menu.drinks.length)" ng-model="order.drink" btn-radio="drink.name" uncheckable ng-repeat="drink in config.menu.drinks" ng-change="calcPrice(order)">{{drink.name}}</label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class=" col-md-2 col-md-offset-1">
-                <p class="hidden-xs space">Size</p>
+                <div class="hidden-xs text-right space lead">Size</div>
             </div>
             <div class="btn-group  col-md-8 col-xs-12">
                 <div class="well well-xs clearfix">
-                    <div class="visible-xs-block">Size</div>
-                    <label class="btn btn-default additional-stuff col-md-4 col-xs-4" ng-model="order.size" btn-radio="size" uncheckable ng-repeat="size in ['small','medium','large']" ng-change="calcPrice(order)">{{size}}</label>
+                    <div class="visible-xs-block lead">Size</div>
+                    <label class="btn btn-default additional-stuff col-md-4 col-xs-4" ng-model="order.size" btn-radio="size" uncheckable ng-repeat="size in config.menu.sizes" ng-change="calcPrice(order)">{{size.name}}</label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 col-md-offset-1">
-                <p class="hidden-xs space">Chocolate</p>
+                <div class="hidden-xs text-right space lead">Milk</div>
             </div>
             <div class="btn-group col-md-8 col-xs-12">
-            <div class="well well-xs clearfix">
-                <div class="visible-xs-block">Chocolate</div>
-                <label class="btn btn-default additional-stuff col-xs-6" ng-class="getSize(config.menu.chocolates.length)" ng-model="order.chocolate" btn-radio="chocolate.name" uncheckable ng-repeat="chocolate in config.menu.chocolates" ng-change="calcPrice(order)">{{chocolate.name}}</label>
+                <div class="well well-xs clearfix">
+                    <div class="visible-xs-block lead">Milk</div>
+                    <label type="button" class="visible-xs-block btn btn-default additional-stuff" ng-class="getSize(config.menu.milks.length)" ng-model="order.milk" btn-radio="milk.name" ng-repeat="milk in config.menu.milks" ng-change="calcPrice(order)">{{milk.name}}</label>
+                    <label type="button" class="hidden-xs btn btn-default additional-stuff" ng-class="getSize(config.menu.milks.length)" radio="milk.name" ng-model="order.milk" ng-repeat="milk in config.menu.milks" ng-change="calcPrice(order)">{{milk.name}}</label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 col-md-offset-1">
-                <p class="hidden-xs space">Milk</p>
-            </div>
-            <div class="btn-group col-md-8 col-xs-12">
-            <div class="well well-xs clearfix">
-                <div class="visible-xs-block">Milk</div>
-                <label type="button" class="visible-xs-block btn btn-default additional-stuff" ng-class="getSize(config.menu.milks.length)" btn-checkbox ng-model="order.milk[milk.name]" ng-repeat="milk in config.menu.milks" ng-change="calcPrice(order)">{{milk.name}}</label>
-                <label type="button" class="hidden-xs btn btn-default additional-stuff" ng-class="getSize(config.menu.milks.length)" btn-checkbox ng-model="order.milk[milk.name]" ng-repeat="milk in config.menu.milks" ng-change="calcPrice(order)">{{milk.name}}</label>
-            </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2 col-md-offset-1">
-                <p class="hidden-xs space">Flavor</p>
+                <div class="hidden-xs text-right space lead">Syrup</div>
             </div>
             <div class="col-md-8 col-xs-12">
-            <div class="well well-xs clearfix">
-                <div class="visible-xs-block">Flavor</div>
-                <label type="button" class="hidden-xs btn btn-default additional-stuff" ng-class="getSize(config.menu.flavors.length)" btn-checkbox ng-model="order.flavor[flavor.name]" ng-repeat="flavor in config.menu.flavors" ng-change="calcPrice(order)">{{flavor.name}}</label>
-                <label type="button" class="visible-xs-block btn btn-default additional-stuff" ng-class="getSize(config.menu.flavors.length)" btn-checkbox ng-model="order.flavor[flavor.name]" ng-repeat="flavor in config.menu.flavors" ng-change="calcPrice(order)">{{flavor.name}}</label>
+                <div class="well well-xs clearfix">
+                    <div class="visible-xs-block lead">Syrup</div>
+                    <label type="button" class="hidden-xs btn btn-default additional-stuff" ng-class="getSize(config.menu.syrups.length)" btn-checkbox ng-model="order.syrup[syrup.name]" ng-repeat="syrup in config.menu.syrups" ng-change="calcPrice(order)">{{syrup.name}}</label>
+                    <label type="button" class="visible-xs-block btn btn-default additional-stuff" ng-class="getSize(config.menu.syrups.length)" btn-checkbox ng-model="order.syrup[syrup.name]" ng-repeat="syrup in config.menu.syrups" ng-change="calcPrice(order)">{{syrup.name}}</label>
+                </div>
             </div>
         </div>
         <div class="row">
-            <form class="form-inline space col-md-8 col-md-offset-3" role="form">
-                <div class="form-group">
+            <div class="col-md-2 col-md-offset-1">
+                <div class="well well-xs clearfix">
+                    <div class="visible-xs-block lead">Extra Shots</div>
                     <div class="input-group">
-                        <div class="input-group-addon">shots</div>
+                        <span class="input-group-addon">Shots</span>
                         <input type="number" class="form-control" placeholder="#" max="3" min="0" ng-model="order.extraShots" ng-change="calcPrice(order)">
                     </div>
                 </div>
-
-                <div class="btn-group">
-                    <label class="btn btn-default additional-stuff" ng-model="order.temp" btn-radio="'extra hot'" uncheckable>extra hot</label>
-                    <label class="btn btn-default additional-stuff" ng-model="order.temp" btn-radio="'hot'" uncheckable>hot</label>
-                    <label class="btn btn-default additional-stuff" ng-model="order.temp" btn-radio="'iced'" uncheckable>iced</label>
-                </div>
-                <label type="button" class="btn btn-default additional-stuff" ng-model="order.mod.extraFoam" btn-checkbox>
-                    extra foam
-                </label>
-
-                <label type="button" class="btn btn-default additional-stuff" ng-model="order.mod.roomForCream" btn-checkbox>
-                    room for cream
-                </label>
-            </form>
-        </div>
-        <div class="row">
-            <div class="btn-group space col-md-offset-3 col-md-8">
-                <label class="btn btn-default additional-stuff col-md-6" ng-model="order.position" btn-radio="'to go'" uncheckable>to go</label>
-                <label class="btn btn-default additional-stuff  col-md-6" ng-model="order.position" btn-radio="'for here'" uncheckable>for here</label>
             </div>
-        </div>
-        <div class="row space">
-            <div class="input-group space col-md-offset-3 col-md-8">
-                <span class="input-group-addon">custom order</span>
-                <input type="text" class="form-control" placeholder="" ng-model="order.comments">
+            <div class="col-md-6">
+                <div class="well well-xs clearfix">
+                    <div class="visible-xs-block lead">Extras</div>
+                    <div class="btn-group col-md-12 col-xs-12">
+                        <label class="btn btn-default additional-stuff col-xs-4" ng-model="order.temp" btn-radio="'extra hot'" uncheckable>extra hot</label>
+                        <label class="btn btn-default additional-stuff col-xs-4" ng-model="order.temp" btn-radio="'hot'" uncheckable>hot</label>
+                        <label class="btn btn-default additional-stuff col-xs-4" ng-model="order.temp" btn-radio="'iced'" uncheckable>iced</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="well well-xs clearfix">
+                    <div class="visible-xs-block lead">Leave a little room?</div>
+
+                    <label type="button" class="btn btn-default additional-stuff col-md-12 col-xs-12" ng-model="order.mod.roomForCream" btn-checkbox>
+                        room
+                    </label>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <div class="section" id="time">
@@ -157,7 +141,7 @@
         <p class="text-center">Today at {{determineTime(pickupTime)}}</p>
         <div ng-repeat="order in orders">
             <div class="row">
-                <div class="col-md-8">({{order.amount}}) {{order.size}} {{order.temp}} {{determineShotPlurality(order.extraShots)}} {{order.chocolate ? order.chocolate+' chocolate' : ''}} {{order.drink}} {{order.position}}
+                <div class="col-md-8">({{order.amount}}) {{order.size.name}} {{order.temp}} {{determineShotPlurality(order.extraShots)}} {{order.chocolate ? order.chocolate+' chocolate' : ''}} {{order.drink}} {{order.position}}
                 </div>
 
                 <div class="col-md-4 text-right">

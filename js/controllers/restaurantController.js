@@ -5,7 +5,6 @@ angular.module('orderup')
             $scope.restaurant = $routeParams.restaurant;
             $scope.location = $routeParams.location;
             $scope.orders = [{
-                size: 'small',
                 amount: 1
             }];
             $scope.pickupTime = new Date();
@@ -14,6 +13,16 @@ angular.module('orderup')
                 openTime: new Date($scope.pickupTime.toDateString()),
                 closeTime: new Date($scope.pickupTime.toDateString()) + (20 * 60 * 1000),
                 menu: {
+                    sizes: [{
+                        name: '8oz',
+                        size: 'small'
+                    }, {
+                        name: '12oz',
+                        size: 'medium'
+                    }, {
+                        name: '16oz',
+                        size: 'large'
+                    }],
                     drinks: [{
                         name: 'Americano',
                         small: '2.00',
@@ -30,12 +39,12 @@ angular.module('orderup')
                         medium: '3.40',
                         large: '4.00'
                     }, {
-                        name: 'Chai',
+                        name: 'Drip',
                         small: '3.00',
                         medium: '3.40',
                         large: '4.00'
                     }],
-                    flavors: [{
+                    syrups: [{
                         name: 'Irish Cream',
                         small: '.70',
                         medium: '.70',
@@ -60,6 +69,22 @@ angular.module('orderup')
                         small: '.70',
                         medium: '.70',
                         large: '.70'
+                    }, {
+                        name: 'White Chocolate',
+                        small: '.00',
+                        medium: '.00',
+                        large: '.00'
+                    }, {
+                        name: 'Dark Chocolate',
+                        small: '.00',
+                        medium: '.00',
+                        large: '.00'
+                    }],
+                    shots: [{
+                        name: 'shot',
+                        small: '.60',
+                        medium: '.60',
+                        large: '.60'
                     }],
                     milks: [{
                         name: 'Half n half',
@@ -96,23 +121,6 @@ angular.module('orderup')
                         small: '.00',
                         medium: '.00',
                         large: '.00'
-                    }],
-                    chocolates: [{
-                        name: 'milk',
-                        small: '.00',
-                        medium: '.00',
-                        large: '.00'
-                    }, {
-                        name: 'dark',
-                        small: '.00',
-                        medium: '.00',
-                        large: '.00'
-                    }],
-                    shots: [{
-                        name: 'shot',
-                        small: '.60',
-                        medium: '.60',
-                        large: '.60'
                     }]
                 }
             };
@@ -125,9 +133,9 @@ angular.module('orderup')
             };
 
             $scope.calcPrice = function(order) {
-                if(!order.price){
+                if (!order.price) {
                     order.price = 1;
-                } else if (order.price < 1){
+                } else if (order.price < 1) {
                     order.price = 1;
                 }
 
@@ -192,20 +200,20 @@ angular.module('orderup')
             };
 
             $scope.determineShotPlurality = function(numOfShots) {
-                var verbage = ['no','single','double','triple'];
+                var verbage = ['no', 'single', 'double', 'triple'];
                 return numOfShots ? verbage[numOfShots] + ' shot' : '';
             };
 
             $scope.determineTime = function(date) {
-                var min = (date.getMinutes().toString().length === 1 ? '0':'') + date.getMinutes();
+                var min = (date.getMinutes().toString().length === 1 ? '0' : '') + date.getMinutes();
                 var meridian = (date.getHours() >= 12 ? ' pm' : ' am');
                 return (date.getHours() === 12 ? 12 : (date.getHours() % 12)) + ':' + min + meridian;
             };
 
-            $scope.getTotal = function(orders){
+            $scope.getTotal = function(orders) {
                 var cost = 0;
-                for(var i = 0; i < orders.length; i++){
-                    if(orders[i].price){
+                for (var i = 0; i < orders.length; i++) {
+                    if (orders[i].price) {
                         cost += parseFloat(orders[i].price);
                     }
                 }

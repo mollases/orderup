@@ -9,6 +9,7 @@ angular.module('orderup')
             }];
             $scope.pickupTime = new Date();
             $scope.previousPickupTime = new Date();
+            $scope.cardData = {};
             $scope.config = {
                 openTime: new Date($scope.pickupTime.toDateString()),
                 closeTime: new Date($scope.pickupTime.toDateString()) + (20 * 60 * 1000),
@@ -144,19 +145,14 @@ angular.module('orderup')
                             return menu.drinks[i][size];
                         }
                     }
-                    for (var i = 0; i < menu.flavors.length; i++) {
-                        if (menu.flavors[i].name === item) {
-                            return menu.flavors[i][size];
+                    for (var i = 0; i < menu.syrups.length; i++) {
+                        if (menu.syrups[i].name === item) {
+                            return menu.syrups[i][size];
                         }
                     }
                     for (var i = 0; i < menu.milks.length; i++) {
                         if (menu.milks[i].name === item) {
                             return menu.milks[i][size];
-                        }
-                    }
-                    for (var i = 0; i < menu.chocolates.length; i++) {
-                        if (menu.chocolates[i].name === item) {
-                            return menu.chocolates[i][size];
                         }
                     }
                     for (var i = 0; i < menu.shots.length; i++) {
@@ -218,6 +214,11 @@ angular.module('orderup')
 
                 $scope.total = cost.toFixed(2);
                 return $scope.total;
+            };
+
+            $scope.placeOrder = function(name,time,order,cost,cardData){
+                var obj = {name:name,time:time,order:order,cost:cost,cardData:cardData};
+                console.log(JSON.stringify(obj));
             };
         }
 );

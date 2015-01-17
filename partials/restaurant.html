@@ -199,13 +199,13 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
+                        <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name" model="cardData.name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="card-number">Card Number</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
+                        <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number" model="cardData.number">
                     </div>
                 </div>
                 <div class="form-group">
@@ -213,7 +213,7 @@
                     <div class="col-sm-9">
                         <div class="row">
                             <div class="col-md-3">
-                                <select class="form-control col-sm-2" name="expiry-month" id="expiry-month">
+                                <select class="form-control col-sm-2" name="expiry-month" id="expiry-month" model="cardData.exMonth">
                                     <option>Month</option>
                                     <option value="01">Jan (01)</option>
                                     <option value="02">Feb (02)</option>
@@ -230,7 +230,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-control" name="expiry-year">
+                                <select class="form-control" name="expiry-year" model="cardData.exYear">
                                     <option value="13">2013</option>
                                     <option value="14">2014</option>
                                     <option value="15">2015</option>
@@ -250,12 +250,12 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
+                        <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code" model="cardData.cvv">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9">
-                        <button type="button" class="btn btn-success">Pay Now</button>
+                        <button type="button" class="btn btn-success" ng-click="placeOrder(orderName,pickupTime,orders,getTotal(orders, tip || 0),cardData)">Place and Pay</button>
                     </div>
                 </div>
             </fieldset>

@@ -133,15 +133,11 @@ angular.module('orderup')
             };
 
             $scope.calcPrice = function(order) {
-                if (!order.price) {
-                    order.price = 1;
-                } else if (order.price < 1) {
-                    order.price = 1;
-                }
-
-                var requestedSize = order.size;
+                if(!order.size){ return 0;}
+                var requestedSize = order.size.size;
                 var findCost = function(item, size) {
                     if (!item) return 0;
+                    if(!size) return 0;
                     var menu = $scope.config.menu;
                     for (var i = 0; i < menu.drinks.length; i++) {
                         if (menu.drinks[i].name === item) {
@@ -210,13 +206,15 @@ angular.module('orderup')
                 return (date.getHours() === 12 ? 12 : (date.getHours() % 12)) + ':' + min + meridian;
             };
 
-            $scope.getTotal = function(orders) {
+            $scope.getTotal = function(orders,tip) {
                 var cost = 0;
                 for (var i = 0; i < orders.length; i++) {
                     if (orders[i].price) {
                         cost += parseFloat(orders[i].price);
                     }
                 }
+
+                cost *= 1+(tip/100);
 
                 $scope.total = cost.toFixed(2);
                 return $scope.total;

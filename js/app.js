@@ -26,6 +26,9 @@ angular
         }).when('/:restaurant/:location', {
             templateUrl: 'partials/restaurant.html',
             controller: 'RestaurantController'
+        }).when('/:restaurant/:location/feed', {
+            templateUrl: 'partials/feed.html',
+            controller: 'RestaurantController'
         }).when('/',{
             templateUrl: 'partials/locationFinder.html',
             controller: 'LocationController'
